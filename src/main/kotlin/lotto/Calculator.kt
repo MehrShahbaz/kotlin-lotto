@@ -3,15 +3,11 @@ package lotto
 import kotlin.collections.emptyMap
 
 class Calculator(
-    val tickets: List<Lotto>,
+    val tickets: MutableList<Lotto>,
     val winningNumbers: WinningNumbers,
     var results: MutableMap<Rank, Int> = emptyMap<Rank,Int>().toMutableMap()
 ) {
     init {
-        results = emptyMap<Rank,Int>().toMutableMap()
-    }
-
-    fun start() {
         tickets.forEach {
             val count = findMatches(it, winningNumbers.winningNumbers)
             val rank = Rank.valueOf(
@@ -20,6 +16,28 @@ class Calculator(
             )
             results[rank] = results.getOrDefault(rank, 0) + 1
         }
+    }
+
+//    fun start() {
+//        tickets.forEach {
+//            val count = findMatches(it, winningNumbers.winningNumbers)
+//            val rank = Rank.valueOf(
+//                count,
+//                bonusNumberPresent(it, winningNumbers.bonusNumber)
+//            )
+//            results[rank] = results.getOrDefault(rank, 0) + 1
+//        }
+//    }
+
+    fun calculateReturnRate(purchaseAmount: Int): Float {
+        print(results)
+        return (calculateTotalEarning() / purchaseAmount.toFloat())
+    }
+
+    private fun calculateTotalEarning(): Float{
+        var total = 0
+        results.forEach { total += it.key.winningMoney * it.value }
+        return total.toFloat()
     }
 
     private fun findMatches(ticket: Lotto, winningTicket: Lotto): Int {

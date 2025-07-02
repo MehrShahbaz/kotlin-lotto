@@ -1,6 +1,6 @@
 package lotto
 
-class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto>? = null) {
+class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = emptyList<Lotto>().toMutableList()) {
     private val numberList = (Lotto.Companion.MIN..Lotto.Companion.MAX)
     private var change = 0
     private var ticketCount = 0
