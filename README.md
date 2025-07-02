@@ -22,4 +22,6 @@
 - [x] Count number of matches between Lotto ticket and winning numbers
 - [x] Store the Ranks in the Calculator class
   - [x] Map of results
-- [x] Calculate return rate 
+- [x] Calculate return rate
+
+### Input View and Output View

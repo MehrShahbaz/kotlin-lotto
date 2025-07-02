@@ -3,7 +3,7 @@ package lotto
 import kotlin.collections.emptyMap
 
 class Calculator(
-    val tickets: MutableList<Lotto>,
+    tickets: MutableList<Lotto>,
     val winningNumbers: WinningNumbers,
     var results: MutableMap<Rank, Int> = emptyMap<Rank,Int>().toMutableMap()
 ) {
