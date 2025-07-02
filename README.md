@@ -14,6 +14,12 @@
   - [x] number of tickets equals purchaseAmount / 1000
 
 ### Winning Numbers
-- [ ] Bonus number in range 0 and 50
-- [ ] Bonus number different than winning numbers
-- [ ] Stores winning numbers as a Lotto ticket
+- [x] Bonus number in range 0 and 50
+- [x] Bonus number different than winning numbers
+- [x] Stores winning numbers as a Lotto ticket
+
+### Calculate Winnings
+- [x] Count number of matches between Lotto ticket and winning numbers
+- [x] Store the Ranks in the Calculator class
+  - [x] Map of results
+- [ ] Calculate return rate 

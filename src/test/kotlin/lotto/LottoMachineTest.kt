@@ -23,7 +23,7 @@ class LottoMachineTest {
     @ValueSource(ints = [1_000, 20_000])
     fun `Generates correct number of tickets as a list`(amount: Int) {
         val machine = LottoMachine(amount)
-        assertEquals(machine.tickets.size, amount / LottoMachine.TICKET_PRICE)
+        assertEquals(machine.tickets?.size, amount / LottoMachine.TICKET_PRICE)
     }
 }
 
