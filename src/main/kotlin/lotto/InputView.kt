@@ -19,6 +19,7 @@ object InputView {
     fun readBonusNumber(): Int {
         println(BONUS_NUMBER_MESSAGE)
         val number = readln().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] Wrong input")
+        println()
         return number
     }
 

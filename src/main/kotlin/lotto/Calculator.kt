@@ -30,7 +30,6 @@ class Calculator(
 //    }
 
     fun calculateReturnRate(purchaseAmount: Int): Float {
-        print(results)
         return (calculateTotalEarning() / purchaseAmount.toFloat())
     }
 
