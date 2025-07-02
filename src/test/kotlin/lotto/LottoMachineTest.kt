@@ -18,5 +18,12 @@ class LottoMachineTest {
         val machine = LottoMachine(1234)
         assertEquals(machine.showChange(), 234)
     }
+
+    @ParameterizedTest
+    @ValueSource(ints = [1_000, 20_000])
+    fun `Generates correct number of tickets as a list`(amount: Int) {
+        val machine = LottoMachine(amount)
+        assertEquals(machine.tickets.size, amount / LottoMachine.TICKET_PRICE)
+    }
 }
 

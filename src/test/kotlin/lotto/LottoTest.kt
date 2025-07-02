@@ -7,9 +7,6 @@ import org.junit.jupiter.api.assertThrows
 class LottoTest {
     @Test
     fun `List of size 6`() {
-//        val lotto = Lotto(listOf(1,2,3,4,5,6))
-//        Assertions.assertThat(lotto.getSize()).isEqualTo(6)
-//        Assertions.assertThatException()
         assertThrows<IllegalArgumentException> { Lotto(mutableSetOf(1,2,3,4,5,6,7)) }
     }
 

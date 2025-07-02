@@ -9,5 +9,6 @@
 - [x] Purchase Amount 
   - [x] Change is calculated for the User
   - [x] minimum 1_000, (maximum 20_000 KRW)
-- [ ] Generates List of Lotto tickets
-  - [ ] each ticket is a random set
+- [x] Generates List of Lotto tickets
+  - [x] each ticket is a random set
+  - [x] number of tickets equals purchaseAmount / 1000

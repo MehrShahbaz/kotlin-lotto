@@ -14,8 +14,8 @@ class Lotto(var numbers: MutableSet<Int>) {
     }
 
     companion object {
-        private const val MIN = 0
-        private const val MAX = 50
-        private const val LOTTO_SIZE = 6
+        const val MIN = 0
+        const val MAX = 50
+        const val LOTTO_SIZE = 6
     }
 }
