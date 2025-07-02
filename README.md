@@ -12,3 +12,8 @@
 - [x] Generates List of Lotto tickets
   - [x] each ticket is a random set
   - [x] number of tickets equals purchaseAmount / 1000
+
+### Winning Numbers
+- [ ] Bonus number in range 0 and 50
+- [ ] Bonus number different than winning numbers
+- [ ] Stores winning numbers as a Lotto ticket
