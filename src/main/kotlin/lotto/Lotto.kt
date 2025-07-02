@@ -1,0 +1,20 @@
+package lotto
+
+class Lotto(var numbers: MutableSet<Int>) {
+    init {
+        require(numbers.size == 6) {
+            throw IllegalArgumentException()
+        }
+        require(numbers.all { it in MIN..MAX }) {
+            throw IllegalArgumentException()
+        }
+//        require(numbers.distinct().size == 6) {
+//            throw IllegalArgumentException()
+//        }
+    }
+
+    companion object {
+        const val MIN = 0
+        const val MAX = 50
+    }
+}
