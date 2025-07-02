@@ -2,7 +2,7 @@ package lotto
 
 class Lotto(var numbers: MutableSet<Int>) {
     init {
-        require(numbers.size == 6) {
+        require(numbers.size == LOTTO_SIZE) {
             throw IllegalArgumentException()
         }
         require(numbers.all { it in MIN..MAX }) {
@@ -14,7 +14,8 @@ class Lotto(var numbers: MutableSet<Int>) {
     }
 
     companion object {
-        const val MIN = 0
-        const val MAX = 50
+        private const val MIN = 0
+        private const val MAX = 50
+        private const val LOTTO_SIZE = 6
     }
 }
