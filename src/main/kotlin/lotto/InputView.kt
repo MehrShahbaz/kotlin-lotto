@@ -7,14 +7,14 @@ object InputView {
         return amount
     }
 
-    fun readWinningNumbers(): MutableSet<Int> {
+    fun readWinningNumbers(): List<Int> {
         println(WINNING_NUMBERS_MESSAGE)
         val numbers =
             readln().split(", ")
                 .map {
                     it.trim().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] Wrong input")
                 }
-        return numbers.toMutableSet()
+        return numbers
     }
 
     fun readBonusNumber(): Int {

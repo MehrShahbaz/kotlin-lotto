@@ -22,8 +22,8 @@ class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = em
         }
     }
 
-    private fun generateNumbers(): MutableSet<Int> {
-        return numberList.shuffled().subList(0, Lotto.LOTTO_SIZE).toMutableSet()
+    private fun generateNumbers(): List<Int> {
+        return numberList.shuffled().subList(0, Lotto.LOTTO_SIZE)
     }
 
     companion object {

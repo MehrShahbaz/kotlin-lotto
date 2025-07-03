@@ -1,6 +1,6 @@
 package lotto
 
-class Lotto(var numbers: MutableSet<Int>) {
+class Lotto(var numbers: List<Int>) {
     init {
         require(numbers.size == LOTTO_SIZE) {
             throw IllegalArgumentException()
@@ -8,9 +8,9 @@ class Lotto(var numbers: MutableSet<Int>) {
         require(numbers.all { it in MIN..MAX }) {
             throw IllegalArgumentException()
         }
-//        require(numbers.distinct().size == 6) {
-//            throw IllegalArgumentException()
-//        }
+        require(numbers.distinct().size == 6) {
+            throw IllegalArgumentException()
+        }
     }
 
     companion object {

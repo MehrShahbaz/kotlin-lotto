@@ -16,7 +16,6 @@ object OutputView {
         println("Total Earnings $totalAmount KRW.")
     }
 
-    // TODO make it smaller
     fun displayWinnings(results: MutableMap<Rank, Int>) {
         println("Winning Statistics\n------------------")
         Rank.entries.reversed().forEach {
@@ -25,22 +24,23 @@ object OutputView {
             }
             val count = results.getOrDefault(it, 0)
             if (it == Rank.SECOND) {
-                println(
-                    "${it.countOfMatch} Matches + Bonus Ball (${
-                        String.format(
-                            "%,d",
-                            it.winningMoney,
-                        )
-                    } KRW) - $count tickets",
-                )
-                return@forEach
+                displaySecondRank(it, count)
+            } else {
+                println("${it.countOfMatch} Matches (${String.format("%,d", it.winningMoney)} KRW) - $count tickets")
             }
-            println("${it.countOfMatch} Matches (${String.format("%,d", it.winningMoney)} KRW) - $count tickets")
         }
         println()
     }
 
     fun displayReturnRate(returnRate: Float) {
         println("Total return rate is $returnRate% (A rate below 1 means a loss).")
+    }
+
+    private fun displaySecondRank(
+        rank: Rank,
+        count: Int,
+    ) {
+        val winningMoney = String.format("%,d", rank.winningMoney)
+        println("${rank.countOfMatch} Matches + Bonus Ball ($winningMoney KRW) - $count tickets")
     }
 }
