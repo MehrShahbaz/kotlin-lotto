@@ -1,19 +1,18 @@
 package lotto
 
-import kotlin.collections.emptyMap
-
 class Calculator(
     tickets: MutableList<Lotto>,
     val winningNumbers: WinningNumbers,
-    var results: MutableMap<Rank, Int> = emptyMap<Rank,Int>().toMutableMap()
+    var results: MutableMap<Rank, Int> = emptyMap<Rank, Int>().toMutableMap(),
 ) {
     init {
         tickets.forEach {
             val count = findMatches(it, winningNumbers.winningNumbers)
-            val rank = Rank.valueOf(
-                count,
-                bonusNumberPresent(it, winningNumbers.bonusNumber)
-            )
+            val rank =
+                Rank.valueOf(
+                    count,
+                    bonusNumberPresent(it, winningNumbers.bonusNumber),
+                )
             results[rank] = results.getOrDefault(rank, 0) + 1
         }
     }
@@ -33,19 +32,25 @@ class Calculator(
         return (calculateTotalEarning() / purchaseAmount.toFloat())
     }
 
-    private fun calculateTotalEarning(): Float{
+    fun calculateTotalEarning(): Float {
         var total = 0
         results.forEach { total += it.key.winningMoney * it.value }
         return total.toFloat()
     }
 
-    private fun findMatches(ticket: Lotto, winningTicket: Lotto): Int {
+    private fun findMatches(
+        ticket: Lotto,
+        winningTicket: Lotto,
+    ): Int {
         var count = 0
         ticket.numbers.forEach { count += if (winningTicket.numbers.contains(it)) 1 else 0 }
         return count
     }
 
-    private fun bonusNumberPresent(ticket: Lotto, bonusNumber: Int): Boolean {
+    private fun bonusNumberPresent(
+        ticket: Lotto,
+        bonusNumber: Int,
+    ): Boolean {
         return ticket.numbers.contains(bonusNumber)
     }
 }

@@ -1,10 +1,10 @@
 package lotto
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
-import org.junit.jupiter.api.Assertions.assertEquals
 
 class LottoMachineTest {
     @ParameterizedTest
@@ -23,7 +23,6 @@ class LottoMachineTest {
     @ValueSource(ints = [1_000, 20_000])
     fun `Generates correct number of tickets as a list`(amount: Int) {
         val machine = LottoMachine(amount)
-        assertEquals(machine.tickets?.size, amount / LottoMachine.TICKET_PRICE)
+        assertEquals(machine.tickets.size, amount / LottoMachine.TICKET_PRICE)
     }
 }
-

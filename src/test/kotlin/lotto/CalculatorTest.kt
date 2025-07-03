@@ -1,6 +1,5 @@
 package lotto
 
-import io.kotest.core.spec.style.AnnotationSpec
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -8,7 +7,7 @@ class CalculatorTest {
     @Test
     fun `Count number of matches between Lotto ticket and winning numbers`() {
         val lotto = Lotto(mutableSetOf(3, 8, 27, 30, 35, 44))
-        val numbers = Lotto(mutableSetOf(3,8,27,4,5,6))
+        val numbers = Lotto(mutableSetOf(3, 8, 27, 4, 5, 6))
         val winningNumbers = WinningNumbers(numbers, 7)
 
         val calculator = Calculator(mutableListOf<Lotto>(lotto), winningNumbers)
@@ -17,17 +16,19 @@ class CalculatorTest {
 
     @Test
     fun `test return rate`() {
-        val tickets = mutableListOf(
-            Lotto(mutableSetOf<Int>(3, 8, 27, 4, 5, 6)), // FIRST
-            Lotto(mutableSetOf(3, 8, 27, 4, 5, 43)), // THIRD
-            Lotto(mutableSetOf(7, 11, 16, 35, 36, 44)),
-            Lotto(mutableSetOf(1, 8, 11, 31, 41, 42)),
-            Lotto(mutableSetOf(13, 14, 16, 38, 42, 45)),
-        )
-        val numbers = Lotto(mutableSetOf(3,8,27,4,5,6))
+        val tickets =
+            mutableListOf(
+                // FIRST
+                Lotto(mutableSetOf<Int>(3, 8, 27, 4, 5, 6)),
+                // THIRD
+                Lotto(mutableSetOf(3, 8, 27, 4, 5, 43)),
+                Lotto(mutableSetOf(7, 11, 16, 35, 36, 44)),
+                Lotto(mutableSetOf(1, 8, 11, 31, 41, 42)),
+                Lotto(mutableSetOf(13, 14, 16, 38, 42, 45)),
+            )
+        val numbers = Lotto(mutableSetOf(3, 8, 27, 4, 5, 6))
         val winningNumbers = WinningNumbers(numbers, 7)
         val calculator = Calculator(tickets, winningNumbers)
         assertEquals(calculator.calculateReturnRate(5000), 400300f)
     }
-
 }

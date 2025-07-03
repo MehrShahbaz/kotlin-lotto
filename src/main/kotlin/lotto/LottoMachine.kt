@@ -18,7 +18,7 @@ class LottoMachine(val purchaseAmount: Int, val tickets: MutableList<Lotto> = em
 
     fun generateTickets() {
         repeat(ticketCount) {
-            tickets?.add(Lotto(generateNumbers()))
+            tickets.add(Lotto(generateNumbers()))
         }
     }
 

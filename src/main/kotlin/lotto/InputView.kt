@@ -9,10 +9,11 @@ object InputView {
 
     fun readWinningNumbers(): MutableSet<Int> {
         println(WINNING_NUMBERS_MESSAGE)
-        val numbers = readln().split(", ")
-            .map {
-                it.trim().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] Wrong input")
-            }
+        val numbers =
+            readln().split(", ")
+                .map {
+                    it.trim().toIntOrNull() ?: throw IllegalArgumentException("[ERROR] Wrong input")
+                }
         return numbers.toMutableSet()
     }
 
