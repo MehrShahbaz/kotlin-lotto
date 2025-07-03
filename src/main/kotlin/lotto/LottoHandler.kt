@@ -11,10 +11,10 @@ object LottoHandler {
 
             val returnRate = calculator.calculateReturnRate(machine.purchaseAmount)
             OutputView.displayWinnings(calculator.results)
-            OutputView.displayTotalWinningAmount(calculator.calculateTotalEarning())
+            OutputView.displayTotalWinningAmount(calculator.calculateTotalEarnings())
             OutputView.displayReturnRate(returnRate)
         } catch (err: IllegalArgumentException) {
-            println(err)
+            println(err.message)
         }
     }
 
@@ -27,7 +27,7 @@ object LottoHandler {
                 OutputView.displayChange(machine.showChange())
                 return machine
             } catch (err: IllegalArgumentException) {
-                println(err)
+                println(err.message)
             }
         }
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
@@ -39,7 +39,7 @@ object LottoHandler {
                 val winningNumbers = InputView.readWinningNumbers()
                 return Lotto(winningNumbers)
             } catch (err: IllegalArgumentException) {
-                println(err)
+                println(err.message)
             }
         }
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
@@ -52,7 +52,7 @@ object LottoHandler {
                 val winningNumbers = WinningNumbers(winningTicket, bonusNumber)
                 return winningNumbers
             } catch (err: IllegalArgumentException) {
-                println(err)
+                println(err.message)
             }
         }
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)

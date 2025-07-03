@@ -17,22 +17,11 @@ class Calculator(
         }
     }
 
-//    fun start() {
-//        tickets.forEach {
-//            val count = findMatches(it, winningNumbers.winningNumbers)
-//            val rank = Rank.valueOf(
-//                count,
-//                bonusNumberPresent(it, winningNumbers.bonusNumber)
-//            )
-//            results[rank] = results.getOrDefault(rank, 0) + 1
-//        }
-//    }
-
     fun calculateReturnRate(purchaseAmount: Int): Float {
-        return (calculateTotalEarning() / purchaseAmount.toFloat())
+        return (calculateTotalEarnings() / purchaseAmount.toFloat())
     }
 
-    fun calculateTotalEarning(): Float {
+    fun calculateTotalEarnings(): Float {
         var total = 0
         results.forEach { total += it.key.winningMoney * it.value }
         return total.toFloat()
