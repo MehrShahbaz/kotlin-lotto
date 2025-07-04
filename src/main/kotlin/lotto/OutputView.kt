@@ -3,7 +3,7 @@ package lotto
 object OutputView {
     fun displayTickets(tickets: List<Lotto>) {
         println("You have purchased ${tickets.size} tickets.")
-        tickets.forEach { println(it.numbers.sorted().joinToString(prefix = "[", postfix = "]")) }
+        tickets.forEach { println(it.numbers.sorted()) }
         println()
     }
 
@@ -16,21 +16,31 @@ object OutputView {
         println("Total Earnings $totalAmount KRW.")
     }
 
-    fun displayWinnings(results: MutableMap<Rank, Int>) {
-        println("Winning Statistics\n------------------")
-        Rank.entries.reversed().forEach {
-            if (it == Rank.MISS) {
-                return@forEach
-            }
-            val count = results.getOrDefault(it, 0)
-            if (it == Rank.SECOND) {
-                displaySecondRank(it, count)
-            } else {
-                println("${it.countOfMatch} Matches (${String.format("%,d", it.winningMoney)} KRW) - $count tickets")
-            }
-        }
-        println()
+    data class WinningResults(val results: Map<Rank, Int>) {
+        operator fun get(rank: Rank): Int = results.getOrDefault(rank, 0)
     }
+
+    fun displayWinnings(results: MutableMap<Rank, Int>) {
+        val winningResults = WinningResults(results)
+        val textByRank =
+            Rank
+                .entries.filterNot { it == Rank.MISS }
+                .associateWith { it.toText(winningResults[it]) }
+                .values.joinToString("\n")
+        println(
+            """
+                |Winning Statistics
+                |------------------
+                |$textByRank
+            """.trimMargin(),
+        )
+    }
+
+    private fun Rank.toText(count: Int): String =
+        when (this) {
+            Rank.SECOND -> displaySecondRank(this, count)
+            else -> "${this.countOfMatch} Matches (${String.format("%,d", this.winningMoney)} KRW) - $count tickets"
+        }
 
     fun displayReturnRate(returnRate: Float) {
         println("Total return rate is $returnRate% (A rate below 1 means a loss).")
@@ -39,8 +49,8 @@ object OutputView {
     private fun displaySecondRank(
         rank: Rank,
         count: Int,
-    ) {
+    ): String {
         val winningMoney = String.format("%,d", rank.winningMoney)
-        println("${rank.countOfMatch} Matches + Bonus Ball ($winningMoney KRW) - $count tickets")
+        return "${rank.countOfMatch} Matches + Bonus Ball ($winningMoney KRW) - $count tickets"
     }
 }
