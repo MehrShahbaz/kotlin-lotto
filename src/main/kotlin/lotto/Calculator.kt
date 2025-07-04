@@ -38,7 +38,7 @@ class Calculator(
 
     private fun bonusNumberPresent(
         ticket: Lotto,
-        bonusNumber: Int,
+        bonusNumber: LottoNumber,
     ): Boolean {
         return ticket.numbers.contains(bonusNumber)
     }

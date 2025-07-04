@@ -1,15 +1,16 @@
 package lotto
 
-class Lotto(val numbers: List<Int>) {
+class Lotto(val numbers: List<LottoNumber>) {
     init {
         require(numbers.size == LOTTO_SIZE)
-        require(numbers.all { it in MIN..MAX })
-        require(numbers.distinct().size == 6)
+        require(numbers.distinct().size == LOTTO_SIZE)
+    }
+
+    fun sortedList(): List<Int> {
+        return numbers.map { it -> it.value }.sorted()
     }
 
     companion object {
-        const val MIN = 0
-        const val MAX = 50
         const val LOTTO_SIZE = 6
     }
 }

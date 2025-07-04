@@ -33,6 +33,9 @@
 - [x] Create Input View
 - [x] Create Output View
 
+### Lotto Number
+- [x] 
+
 #### Sample Output
 ```
 Please enter the purchase amount.

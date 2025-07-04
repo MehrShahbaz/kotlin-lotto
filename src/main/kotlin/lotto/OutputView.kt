@@ -3,7 +3,12 @@ package lotto
 object OutputView {
     fun displayTickets(tickets: List<Lotto>) {
         println("You have purchased ${tickets.size} tickets.")
-        tickets.forEach { println(it.numbers.sorted()) }
+        val textByTicket =
+            tickets
+                .map { it -> it.sortedList() }
+                .joinToString("\n")
+
+        println(textByTicket)
         println()
     }
 

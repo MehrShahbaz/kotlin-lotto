@@ -36,7 +36,7 @@ object LottoHandler {
     private fun processWinningNumbers(): Lotto {
         repeat(MAX_ATTEMPT) {
             try {
-                val winningNumbers = InputView.readWinningNumbers()
+                val winningNumbers = InputView.readWinningNumbers().map { it -> LottoNumber.from(it) }
                 return Lotto(winningNumbers)
             } catch (err: IllegalArgumentException) {
                 OutputView.displayError(err.message)
@@ -48,7 +48,8 @@ object LottoHandler {
     private fun processBonusNumbers(winningTicket: Lotto): WinningNumbers {
         repeat(MAX_ATTEMPT) {
             try {
-                val bonusNumber = InputView.readBonusNumber()
+                val number = InputView.readBonusNumber()
+                val bonusNumber = LottoNumber.from(number)
                 val winningNumbers = WinningNumbers(winningTicket, bonusNumber)
                 return winningNumbers
             } catch (err: IllegalArgumentException) {

@@ -21,13 +21,15 @@ class LottoMachine(
         tickets.addAll(lottoTickets)
     }
 
-    private fun generateNumbers(): List<Int> =
+    private fun generateNumbers(): List<LottoNumber> =
         numberList
             .shuffled()
             .take(Lotto.LOTTO_SIZE)
 
     companion object {
-        private val numberList = (Lotto.MIN..Lotto.MAX)
+        private val numberList =
+            (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER)
+                .map { it -> LottoNumber.from(it) }
         private const val MIN = 1_000
         private const val MAX = 20_000
         const val TICKET_PRICE = 1_000
