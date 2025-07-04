@@ -17,14 +17,14 @@ class LottoMachine(
     fun showChange() = change
 
     fun generateTickets() {
-        repeat(ticketCount) {
-            tickets.add(Lotto(generateNumbers()))
-        }
+        val lottoTickets = List(ticketCount) { Lotto(generateNumbers()) }
+        tickets.addAll(lottoTickets)
     }
 
-    private fun generateNumbers(): List<Int> {
-        return numberList.shuffled().subList(0, Lotto.LOTTO_SIZE)
-    }
+    private fun generateNumbers(): List<Int> =
+        numberList
+            .shuffled()
+            .take(Lotto.LOTTO_SIZE)
 
     companion object {
         private val numberList = (Lotto.MIN..Lotto.MAX)
