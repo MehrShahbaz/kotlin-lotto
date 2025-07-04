@@ -3,7 +3,7 @@ package lotto
 object InputView {
     fun readPurchaseAmount(): Int {
         println(PURCHASE_MESSAGE)
-        val amount = readln().toIntOrNull() ?: throw IllegalArgumentException(ERROR_MESSAGE)
+        val amount = readln().trim().toIntOrNull() ?: throw IllegalArgumentException(ERROR_MESSAGE)
         return amount
     }
 
