@@ -4,14 +4,11 @@ class LottoMachine(
     val purchaseAmount: Int,
     val tickets: MutableList<Lotto> = emptyList<Lotto>().toMutableList(),
 ) {
-    private val numberList = (Lotto.Companion.MIN..Lotto.Companion.MAX)
     private var change = 0
     private var ticketCount = 0
 
     init {
-        require(purchaseAmount in MIN..MAX) {
-            throw IllegalArgumentException()
-        }
+        require(purchaseAmount in MIN..MAX)
         change = purchaseAmount % TICKET_PRICE
         ticketCount = (purchaseAmount - change) / TICKET_PRICE
         generateTickets()
@@ -30,6 +27,7 @@ class LottoMachine(
     }
 
     companion object {
+        private val numberList = (Lotto.MIN..Lotto.MAX)
         private const val MIN = 1_000
         private const val MAX = 20_000
         const val TICKET_PRICE = 1_000

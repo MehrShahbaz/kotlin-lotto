@@ -1,16 +1,10 @@
 package lotto
 
-class Lotto(var numbers: List<Int>) {
+class Lotto(val numbers: List<Int>) {
     init {
-        require(numbers.size == LOTTO_SIZE) {
-            throw IllegalArgumentException()
-        }
-        require(numbers.all { it in MIN..MAX }) {
-            throw IllegalArgumentException()
-        }
-        require(numbers.distinct().size == 6) {
-            throw IllegalArgumentException()
-        }
+        require(numbers.size == LOTTO_SIZE)
+        require(numbers.all { it in MIN..MAX })
+        require(numbers.distinct().size == 6)
     }
 
     companion object {
