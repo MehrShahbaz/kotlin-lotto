@@ -36,15 +36,19 @@ object OutputView {
         )
     }
 
+    fun displayReturnRate(returnRate: Float) {
+        println("Total return rate is $returnRate% (A rate below 1 means a loss).")
+    }
+
+    fun displayError(errorMessage: String?) {
+        println("[Error]::${errorMessage ?: ""}")
+    }
+
     private fun Rank.toText(count: Int): String =
         when (this) {
             Rank.SECOND -> displaySecondRank(this, count)
             else -> "${this.countOfMatch} Matches (${String.format("%,d", this.winningMoney)} KRW) - $count tickets"
         }
-
-    fun displayReturnRate(returnRate: Float) {
-        println("Total return rate is $returnRate% (A rate below 1 means a loss).")
-    }
 
     private fun displaySecondRank(
         rank: Rank,
