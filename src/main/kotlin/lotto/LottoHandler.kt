@@ -1,0 +1,64 @@
+package lotto
+
+object LottoHandler {
+    fun start() {
+        try {
+            val machine = buyTickets()
+            val winningTicket = processWinningNumbers()
+            val winningNumbers = processBonusNumbers(winningTicket)
+
+            val calculator = Calculator(machine.tickets, winningNumbers)
+
+            val returnRate = calculator.calculateReturnRate(machine.purchaseAmount)
+            OutputView.displayWinnings(calculator.results)
+            OutputView.displayTotalWinningAmount(calculator.calculateTotalEarnings())
+            OutputView.displayReturnRate(returnRate)
+        } catch (err: IllegalArgumentException) {
+            OutputView.displayError(err.message)
+        }
+    }
+
+    private fun buyTickets(): LottoMachine {
+        repeat(MAX_ATTEMPT) {
+            try {
+                val purchaseAmount = InputView.readPurchaseAmount()
+                val machine = LottoMachine(purchaseAmount)
+                OutputView.displayTickets(machine.tickets)
+                OutputView.displayChange(machine.showChange())
+                return machine
+            } catch (err: IllegalArgumentException) {
+                OutputView.displayError(err.message)
+            }
+        }
+        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    private fun processWinningNumbers(): Lotto {
+        repeat(MAX_ATTEMPT) {
+            try {
+                val winningNumbers = InputView.readWinningNumbers().map { it -> LottoNumber.from(it) }
+                return Lotto(winningNumbers)
+            } catch (err: IllegalArgumentException) {
+                OutputView.displayError(err.message)
+            }
+        }
+        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    private fun processBonusNumbers(winningTicket: Lotto): WinningNumbers {
+        repeat(MAX_ATTEMPT) {
+            try {
+                val number = InputView.readBonusNumber()
+                val bonusNumber = LottoNumber.from(number)
+                val winningNumbers = WinningNumbers(winningTicket, bonusNumber)
+                return winningNumbers
+            } catch (err: IllegalArgumentException) {
+                OutputView.displayError(err.message)
+            }
+        }
+        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    private const val MAX_ATTEMPT = 5
+    private const val MAX_ATTEMPT_MESSAGE = "Too many attempts"
+}
