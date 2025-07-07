@@ -24,7 +24,7 @@ object LottoHandler {
 
             val calculator = Calculator(machine.tickets, winningNumbers)
 
-            val returnRate = calculator.calculateReturnRate(machine.ticketCounter.purchaseAmount.amount)
+            val returnRate = calculator.calculateReturnRate(machine.ticketCounter.purchaseAmount)
             OutputView.displayWinnings(calculator.results)
             OutputView.displayTotalWinningAmount(calculator.calculateTotalEarnings())
             OutputView.displayReturnRate(returnRate)
