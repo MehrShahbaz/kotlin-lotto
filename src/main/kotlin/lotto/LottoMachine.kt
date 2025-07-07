@@ -1,23 +1,20 @@
 package lotto
 
 class LottoMachine(
-    val purchaseAmount: Int,
+    val ticketCounter: TicketCounter,
     val tickets: MutableList<Lotto> = emptyList<Lotto>().toMutableList(),
 ) {
     private var change = 0
-    private var ticketCount = 0
 
     init {
-        require(purchaseAmount in MIN..MAX) { "Purchase amount must be between $MIN and $MAX" }
-        change = purchaseAmount % TICKET_PRICE
-        ticketCount = (purchaseAmount - change) / TICKET_PRICE
+        change = ticketCounter.purchaseAmount.amount % TICKET_PRICE
         generateTickets()
     }
 
     fun showChange() = change
 
     private fun generateTickets() {
-        val lottoTickets = List(ticketCount) { Lotto(generateNumbers()) }
+        val lottoTickets = List(ticketCounter.generatedTicketCount) { Lotto(generateNumbers()) }
         tickets.addAll(lottoTickets)
     }
 
@@ -30,8 +27,6 @@ class LottoMachine(
         private val NUMBER_LIST =
             (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER)
                 .map(LottoNumber::from)
-        private const val MIN = 1_000
-        private const val MAX = 20_000
         const val TICKET_PRICE = 1_000
     }
 }
