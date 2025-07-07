@@ -3,10 +3,14 @@ package lotto.view
 import lotto.Lotto
 import lotto.LottoNumber
 import lotto.Rank
+import lotto.TicketCounter
 
 object OutputView {
-    fun displayTickets(tickets: List<Lotto>) {
-        println("\nYou have purchased ${tickets.size} tickets.")
+    fun displayTickets(
+        tickets: List<Lotto>,
+        ticketCounter: TicketCounter,
+    ) {
+        printTicketCount(ticketCounter)
         val textByTicket =
             tickets
                 .map(OutputView::sortedLottoTicket)
@@ -71,5 +75,11 @@ object OutputView {
     ): String {
         val winningMoney = String.format("%,d", rank.winningMoney)
         return "${rank.countOfMatch} Matches + Bonus Ball ($winningMoney KRW) - $count tickets"
+    }
+
+    private fun printTicketCount(ticketCounter: TicketCounter) {
+        println(
+            "\nPurchased ${ticketCounter.enteredTicketCount.count} manual and ${ticketCounter.generatedTicketCount} automatic tickets.",
+        )
     }
 }

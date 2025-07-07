@@ -47,6 +47,7 @@
 
 #### Sample Output
 ```
+
 Please enter the purchase amount.
 9876
 
@@ -60,13 +61,13 @@ Enter the numbers for manual tickets.
 Enter the numbers for manual tickets.
 7, 11, 16, 35, 36, 44
 
-You have purchased 9 tickets.
-[6, 10, 16, 27, 40, 42]
-[19, 24, 34, 38, 39, 40]
-[6, 15, 17, 23, 25, 37]
-[1, 6, 10, 14, 19, 41]
-[4, 19, 31, 42, 44, 45]
-[2, 8, 9, 11, 22, 37]
+Purchased 3 manual and 6 automatic tickets.
+[15, 23, 25, 28, 40, 44]
+[6, 14, 18, 30, 33, 35]
+[1, 4, 11, 19, 27, 38]
+[25, 27, 35, 36, 38, 45]
+[5, 13, 15, 38, 39, 44]
+[2, 7, 18, 32, 33, 44]
 [8, 21, 23, 41, 42, 43]
 [3, 5, 11, 16, 32, 38]
 [7, 11, 16, 35, 36, 44]
@@ -74,7 +75,7 @@ You have purchased 9 tickets.
 Your change is 876 KRW.
 
 Please enter last week’s winning numbers.
-1, 2, 3, 4, 5, 6
+1,2,3,4,5,6
 
 Please enter the bonus number.
 7
