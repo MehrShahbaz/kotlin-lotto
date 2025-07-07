@@ -8,6 +8,9 @@
 ### Purchase Amount
 - [x] Minimum 1_000, (maximum 20_000 KRW)
 
+### Entered Ticket Count
+- [x] Must be a positive number
+
 ### Lotto Machine 
 - [x] Change
   - [x] Change is calculated for the User
