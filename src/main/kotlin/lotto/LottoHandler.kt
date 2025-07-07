@@ -1,15 +1,32 @@
 package lotto
 
+import lotto.view.InputView
+import lotto.view.OutputView
+
 object LottoHandler {
     fun start() {
         try {
-            val machine = buyTickets()
-            val winningTicket = processWinningNumbers()
-            val winningNumbers = processBonusNumbers(winningTicket)
+            val purchaseAmount = processPurchaseAmount()
+            val ticketCount = processManualTicketCount()
+
+            val ticketCounter = TicketCounter(purchaseAmount, ticketCount)
+
+            val machine = LottoMachine(ticketCounter)
+            machine.tickets.addAll(
+                readManualTickets(
+                    machine.ticketCounter.enteredTicketCount.count,
+                ),
+            )
+            OutputView.displayTickets(machine.tickets)
+            OutputView.displayChange(machine.showChange())
+
+            val winningTicket = readTicket("Please enter last week’s winning numbers.")
+            val bonusNumber = readBonusNumbers()
+            val winningNumbers = WinningNumbers(winningTicket, bonusNumber)
 
             val calculator = Calculator(machine.tickets, winningNumbers)
 
-            val returnRate = calculator.calculateReturnRate(machine.purchaseAmount)
+            val returnRate = calculator.calculateReturnRate(machine.ticketCounter.purchaseAmount.amount)
             OutputView.displayWinnings(calculator.results)
             OutputView.displayTotalWinningAmount(calculator.calculateTotalEarnings())
             OutputView.displayReturnRate(returnRate)
@@ -18,14 +35,11 @@ object LottoHandler {
         }
     }
 
-    private fun buyTickets(): LottoMachine {
+    private fun processPurchaseAmount(): PurchaseAmount {
         repeat(MAX_ATTEMPT) {
             try {
                 val purchaseAmount = InputView.readPurchaseAmount()
-                val machine = LottoMachine(purchaseAmount)
-                OutputView.displayTickets(machine.tickets)
-                OutputView.displayChange(machine.showChange())
-                return machine
+                return PurchaseAmount(purchaseAmount)
             } catch (err: IllegalArgumentException) {
                 OutputView.displayError(err.message)
             }
@@ -33,10 +47,30 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    private fun processWinningNumbers(): Lotto {
+    private fun processManualTicketCount(): EnteredTicketCount {
         repeat(MAX_ATTEMPT) {
             try {
-                val winningNumbers = InputView.readWinningNumbers().map(LottoNumber::from)
+                val count = InputView.readManualTicketCount()
+                return EnteredTicketCount(count)
+            } catch (err: IllegalArgumentException) {
+                OutputView.displayError(err.message)
+            }
+        }
+        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    private fun readManualTickets(count: Int): List<Lotto> {
+        val tickets = mutableListOf<Lotto>()
+        repeat(count) {
+            tickets.add(readTicket("Enter the numbers for manual tickets."))
+        }
+        return tickets
+    }
+
+    private fun readTicket(message: String): Lotto {
+        repeat(MAX_ATTEMPT) {
+            try {
+                val winningNumbers = InputView.readTicket(message).map(LottoNumber::from)
                 return Lotto(winningNumbers)
             } catch (err: IllegalArgumentException) {
                 OutputView.displayError(err.message)
@@ -45,13 +79,11 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    private fun processBonusNumbers(winningTicket: Lotto): WinningNumbers {
+    private fun readBonusNumbers(): LottoNumber {
         repeat(MAX_ATTEMPT) {
             try {
                 val number = InputView.readBonusNumber()
-                val bonusNumber = LottoNumber.from(number)
-                val winningNumbers = WinningNumbers(winningTicket, bonusNumber)
-                return winningNumbers
+                return LottoNumber.from(number)
             } catch (err: IllegalArgumentException) {
                 OutputView.displayError(err.message)
             }

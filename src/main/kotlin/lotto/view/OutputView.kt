@@ -1,8 +1,12 @@
-package lotto
+package lotto.view
+
+import lotto.Lotto
+import lotto.LottoNumber
+import lotto.Rank
 
 object OutputView {
     fun displayTickets(tickets: List<Lotto>) {
-        println("You have purchased ${tickets.size} tickets.")
+        println("\nYou have purchased ${tickets.size} tickets.")
         val textByTicket =
             tickets
                 .map(OutputView::sortedLottoTicket)
