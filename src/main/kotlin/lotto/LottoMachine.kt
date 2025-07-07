@@ -8,7 +8,7 @@ class LottoMachine(
     private var ticketCount = 0
 
     init {
-        require(purchaseAmount in MIN..MAX)
+        require(purchaseAmount in MIN..MAX) { "Purchase amount must be between $MIN and $MAX" }
         change = purchaseAmount % TICKET_PRICE
         ticketCount = (purchaseAmount - change) / TICKET_PRICE
         generateTickets()
