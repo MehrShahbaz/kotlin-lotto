@@ -15,7 +15,7 @@ object LottoHandler {
                     machine.ticketCounter.enteredTicketCount.count,
                 ),
             )
-            OutputView.displayTickets(machine.tickets)
+            OutputView.displayTickets(machine.tickets, machine.ticketCounter)
             OutputView.displayChange(machine.showChange())
 
             val winningTicket = readTicket("Please enter last week’s winning numbers.")
@@ -33,11 +33,10 @@ object LottoHandler {
         }
     }
 
-    private fun processPurchaseAmount(): PurchaseAmount {
+    private fun <T> readInput(block: () -> T): T {
         repeat(MAX_ATTEMPT) {
             try {
-                val purchaseAmount = InputView.readPurchaseAmount()
-                return PurchaseAmount(purchaseAmount)
+                return block()
             } catch (err: IllegalArgumentException) {
                 OutputView.displayError(err.message)
             }
@@ -45,16 +44,32 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    private fun processTicketCount(purchaseAmount: PurchaseAmount): TicketCounter {
-        repeat(MAX_ATTEMPT) {
-            try {
-                val count = InputView.readManualTicketCount()
-                return TicketCounter(purchaseAmount, EnteredTicketCount(count))
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayError(err.message)
-            }
+    private fun processPurchaseAmount(): PurchaseAmount {
+        return readInput {
+            val purchaseAmount = InputView.readPurchaseAmount()
+            PurchaseAmount(purchaseAmount)
         }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
+    }
+
+    private fun processTicketCount(purchaseAmount: PurchaseAmount): TicketCounter {
+        return readInput {
+            val count = InputView.readManualTicketCount()
+            TicketCounter(purchaseAmount, EnteredTicketCount(count))
+        }
+    }
+
+    private fun readTicket(message: String): Lotto {
+        return readInput {
+            val winningNumbers = InputView.readTicket(message).map(LottoNumber::from)
+            Lotto(winningNumbers)
+        }
+    }
+
+    private fun readBonusNumbers(): LottoNumber {
+        return readInput {
+            val number = InputView.readBonusNumber()
+            LottoNumber.from(number)
+        }
     }
 
     private fun readManualTickets(count: Int): List<Lotto> {
@@ -63,30 +78,6 @@ object LottoHandler {
             tickets.add(readTicket("Enter the numbers for manual tickets."))
         }
         return tickets
-    }
-
-    private fun readTicket(message: String): Lotto {
-        repeat(MAX_ATTEMPT) {
-            try {
-                val winningNumbers = InputView.readTicket(message).map(LottoNumber::from)
-                return Lotto(winningNumbers)
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayError(err.message)
-            }
-        }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
-    }
-
-    private fun readBonusNumbers(): LottoNumber {
-        repeat(MAX_ATTEMPT) {
-            try {
-                val number = InputView.readBonusNumber()
-                return LottoNumber.from(number)
-            } catch (err: IllegalArgumentException) {
-                OutputView.displayError(err.message)
-            }
-        }
-        throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
     private const val MAX_ATTEMPT = 5
