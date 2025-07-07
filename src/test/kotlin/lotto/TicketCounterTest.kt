@@ -26,4 +26,14 @@ class TicketCounterTest {
             TicketCounter(purchaseAmount, enteredTicketCount).purchaseAmount
         }
     }
+
+    @Test
+    fun `Generated ticket count is correct`() {
+        val purchaseAmount = PurchaseAmount(9876)
+        val enteredTicketCount = EnteredTicketCount(4)
+        assertEquals(
+            TicketCounter(purchaseAmount, enteredTicketCount).generatedTicketCount,
+            5,
+        )
+    }
 }
