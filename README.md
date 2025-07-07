@@ -11,6 +11,9 @@
 ### Entered Ticket Count
 - [x] Must be a positive number
 
+### Ticket Counter
+- [x] Entered Ticket count should be less than Purchasable tickets
+
 ### Lotto Machine 
 - [x] Change
   - [x] Change is calculated for the User
