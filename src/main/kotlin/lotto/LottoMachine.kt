@@ -16,20 +16,20 @@ class LottoMachine(
 
     fun showChange() = change
 
-    fun generateTickets() {
+    private fun generateTickets() {
         val lottoTickets = List(ticketCount) { Lotto(generateNumbers()) }
         tickets.addAll(lottoTickets)
     }
 
     private fun generateNumbers(): List<LottoNumber> =
-        numberList
+        NUMBER_LIST
             .shuffled()
             .take(Lotto.LOTTO_SIZE)
 
     companion object {
-        private val numberList =
+        private val NUMBER_LIST =
             (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER)
-                .map { it -> LottoNumber.from(it) }
+                .map(LottoNumber::from)
         private const val MIN = 1_000
         private const val MAX = 20_000
         const val TICKET_PRICE = 1_000
