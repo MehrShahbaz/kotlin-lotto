@@ -5,7 +5,7 @@ object OutputView {
         println("You have purchased ${tickets.size} tickets.")
         val textByTicket =
             tickets
-                .map { it -> it.sortedList() }
+                .map(OutputView::sortedLottoTicket)
                 .joinToString("\n")
 
         println(textByTicket)
@@ -47,6 +47,12 @@ object OutputView {
 
     fun displayError(errorMessage: String?) {
         println("[Error]::${errorMessage ?: ""}")
+    }
+
+    private fun sortedLottoTicket(ticket: Lotto): List<Int> {
+        return ticket.numbers
+            .map(LottoNumber::value)
+            .sorted()
     }
 
     private fun Rank.toText(count: Int): String =
