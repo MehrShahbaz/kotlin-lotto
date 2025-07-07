@@ -36,7 +36,7 @@ object LottoHandler {
     private fun processWinningNumbers(): Lotto {
         repeat(MAX_ATTEMPT) {
             try {
-                val winningNumbers = InputView.readWinningNumbers().map { it -> LottoNumber.from(it) }
+                val winningNumbers = InputView.readWinningNumbers().map(LottoNumber::from)
                 return Lotto(winningNumbers)
             } catch (err: IllegalArgumentException) {
                 OutputView.displayError(err.message)

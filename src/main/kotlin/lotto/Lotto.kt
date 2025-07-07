@@ -7,7 +7,7 @@ class Lotto(val numbers: List<LottoNumber>) {
     }
 
     fun sortedList(): List<Int> {
-        return numbers.map { it -> it.value }.sorted()
+        return numbers.map(LottoNumber::value).sorted()
     }
 
     companion object {
