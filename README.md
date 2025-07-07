@@ -13,15 +13,14 @@
 
 ### Ticket Counter
 - [x] Entered Ticket count should be less than Purchasable tickets
+- [x] Number of tickets equals purchaseAmount / 1000
+- [x] Automatic ticket count equals Purchasable Tickets - Entered Ticket Count
 
 ### Lotto Machine 
 - [x] Change
   - [x] Change is calculated for the User
--[ ] Manual ticket count
-  - [ ] Should be less than or equal to purchasable ticket count
-- [ ] Generates List of automatic Lotto tickets
+- [x] Generates List of automatic Lotto tickets
   - [x] Each ticket is a random set
-  - [ ] Number of tickets equals purchaseAmount / 1000 - manual tickets
 
 ### Winning Numbers
 - [x] Bonus number in range 0 and 50
@@ -50,33 +49,45 @@
 ```
 Please enter the purchase amount.
 9876
+
+Enter the number of manual tickets to purchase.
+3
+
+Enter the numbers for manual tickets.
+8, 21, 23, 41, 42, 43
+Enter the numbers for manual tickets.
+3, 5, 11, 16, 32, 38
+Enter the numbers for manual tickets.
+7, 11, 16, 35, 36, 44
+
 You have purchased 9 tickets.
-[18, 23, 31, 43, 48, 50]
-[8, 16, 19, 23, 39, 41]
-[3, 13, 14, 21, 23, 26]
-[6, 13, 15, 17, 26, 36]
-[5, 11, 31, 34, 35, 42]
-[3, 4, 11, 33, 35, 37]
-[10, 17, 30, 33, 37, 41]
-[5, 20, 21, 29, 40, 44]
-[3, 32, 34, 37, 38, 43]
+[6, 10, 16, 27, 40, 42]
+[19, 24, 34, 38, 39, 40]
+[6, 15, 17, 23, 25, 37]
+[1, 6, 10, 14, 19, 41]
+[4, 19, 31, 42, 44, 45]
+[2, 8, 9, 11, 22, 37]
+[8, 21, 23, 41, 42, 43]
+[3, 5, 11, 16, 32, 38]
+[7, 11, 16, 35, 36, 44]
 
 Your change is 876 KRW.
 
 Please enter last week’s winning numbers.
-3, 32, 34, 37, 38, 1
+1, 2, 3, 4, 5, 6
+
 Please enter the bonus number.
-40
+7
 
 Winning Statistics
 ------------------
-3 Matches (5,000 KRW) - 0 tickets
-4 Matches (50,000 KRW) - 0 tickets
-5 Matches (1,500,000 KRW) - 1 tickets
-5 Matches + Bonus Ball (30,000,000 KRW) - 0 tickets
 6 Matches (2,000,000,000 KRW) - 0 tickets
+5 Matches + Bonus Ball (30,000,000 KRW) - 0 tickets
+5 Matches (1,500,000 KRW) - 0 tickets
+4 Matches (50,000 KRW) - 0 tickets
+3 Matches (5,000 KRW) - 0 tickets
+Total Earnings 0.0 KRW.
+Total return rate is 0.0% (A rate below 1 means a loss).
 
-Total Earnings 1500000.0 KRW.
-Total return rate is 151.88335% (A rate below 1 means a loss).
 ```
 
