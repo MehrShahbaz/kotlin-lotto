@@ -7,9 +7,7 @@ object LottoHandler {
     fun start() {
         try {
             val purchaseAmount = processPurchaseAmount()
-            val ticketCount = processManualTicketCount()
-
-            val ticketCounter = TicketCounter(purchaseAmount, ticketCount)
+            val ticketCounter = processTicketCount(purchaseAmount)
 
             val machine = LottoMachine(ticketCounter)
             machine.tickets.addAll(
@@ -47,11 +45,11 @@ object LottoHandler {
         throw IllegalArgumentException(MAX_ATTEMPT_MESSAGE)
     }
 
-    private fun processManualTicketCount(): EnteredTicketCount {
+    private fun processTicketCount(purchaseAmount: PurchaseAmount): TicketCounter {
         repeat(MAX_ATTEMPT) {
             try {
                 val count = InputView.readManualTicketCount()
-                return EnteredTicketCount(count)
+                return TicketCounter(purchaseAmount, EnteredTicketCount(count))
             } catch (err: IllegalArgumentException) {
                 OutputView.displayError(err.message)
             }
