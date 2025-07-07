@@ -5,13 +5,17 @@
 - [x] Numbers should be between 0 and 50
 - [x] List has unique elements
 
+### Purchase Amount
+- [x] Minimum 1_000, (maximum 20_000 KRW)
+
 ### Lotto Machine 
-- [x] Purchase Amount 
+- [x] Change
   - [x] Change is calculated for the User
-  - [x] Minimum 1_000, (maximum 20_000 KRW)
-- [x] Generates List of Lotto tickets
+-[ ] Manual ticket count
+  - [ ] Should be less than or equal to purchasable ticket count
+- [ ] Generates List of automatic Lotto tickets
   - [x] Each ticket is a random set
-  - [x] Number of tickets equals purchaseAmount / 1000
+  - [ ] Number of tickets equals purchaseAmount / 1000 - manual tickets
 
 ### Winning Numbers
 - [x] Bonus number in range 0 and 50
@@ -34,7 +38,7 @@
 - [x] Create Output View
 
 ### Lotto Number
-- [x] 
+- [x] Must be between 0 and 45
 
 #### Sample Output
 ```
