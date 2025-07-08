@@ -13,7 +13,7 @@ class PurchaseAmountTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [1_001, 19_000])
+    @ValueSource(ints = [1_000, 20_000])
     fun `Purchase amount should be in range of 1_000 and (maximum 20_000 KRW)`(number: Int) {
         assertEquals(PurchaseAmount(number).amount, number)
     }

@@ -13,7 +13,7 @@ class LottoMachineTest {
 
         val ticketCounter = TicketCounter(purchaseAmount, enteredTicketCount)
         val machine = LottoMachine(ticketCounter)
-        assertEquals(machine.showChange(), 876)
+        assertEquals(machine.change, 876)
     }
 
     @ParameterizedTest
