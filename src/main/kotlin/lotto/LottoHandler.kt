@@ -12,13 +12,13 @@ object LottoHandler {
             val machine = LottoMachine(ticketCounter)
             machine.tickets.addAll(
                 readManualTickets(
-                    machine.ticketCounter.enteredTicketCount.count,
+                    machine.manualTicketCount(),
                 ),
             )
             OutputView.displayTickets(machine.tickets, machine.ticketCounter)
             OutputView.displayChange(machine.change)
 
-            val winningTicket = readTicket("Please enter last week’s winning numbers.")
+            val winningTicket = readTicket()
             val bonusNumber = readBonusNumbers()
             val winningNumbers = WinningNumbers(winningTicket, bonusNumber)
 
@@ -58,9 +58,9 @@ object LottoHandler {
         }
     }
 
-    private fun readTicket(message: String): Lotto {
+    private fun readTicket(): Lotto {
         return readInput {
-            val winningNumbers = InputView.readTicket(message).map(LottoNumber::from)
+            val winningNumbers = convertLottoNumbers(InputView.readWinningTicket())
             Lotto(winningNumbers)
         }
     }
@@ -75,9 +75,13 @@ object LottoHandler {
     private fun readManualTickets(count: Int): List<Lotto> {
         val tickets = mutableListOf<Lotto>()
         repeat(count) {
-            tickets.add(readTicket("Enter the numbers for manual tickets."))
+            tickets.add(Lotto(convertLottoNumbers(InputView.readManualTicket())))
         }
         return tickets
+    }
+
+    private fun convertLottoNumbers(numbers: List<Int>): List<LottoNumber> {
+        return numbers.map(LottoNumber::from)
     }
 
     private const val MAX_ATTEMPT = 5

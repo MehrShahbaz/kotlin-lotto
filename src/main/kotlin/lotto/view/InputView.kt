@@ -14,8 +14,17 @@ object InputView {
         return count
     }
 
-    fun readTicket(message: String): List<Int> {
-        println(message)
+    fun readWinningTicket(): List<Int> {
+        println(WINNING_TICKET_MESSAGE)
+        return readTicket()
+    }
+
+    fun readManualTicket(): List<Int> {
+        println(MANUAL_TICKET_MESSAGE)
+        return readTicket()
+    }
+
+    private fun readTicket(): List<Int> {
         val numbers =
             readln().split(",")
                 .map {
@@ -32,7 +41,9 @@ object InputView {
     }
 
     private const val PURCHASE_MESSAGE = "Please enter the purchase amount."
+    private const val WINNING_TICKET_MESSAGE = "Please enter last week’s winning numbers."
     private const val MANUAL_TICKET_COUNT_MESSAGE = "Enter the number of manual tickets to purchase."
+    private const val MANUAL_TICKET_MESSAGE = "Enter the numbers for manual tickets."
     private const val BONUS_NUMBER_MESSAGE = "Please enter the bonus number."
     private const val ERROR_MESSAGE = "[ERROR] Wrong input"
 }

@@ -12,6 +12,8 @@ class LottoMachine(
         generateTickets()
     }
 
+    fun manualTicketCount() = ticketCounter.purchaseAmount.amount
+
     private fun generateTickets() {
         val lottoTickets = List(ticketCounter.generatedTicketCount) { Lotto(generateNumbers()) }
         tickets.addAll(lottoTickets)
