@@ -4,14 +4,13 @@ class LottoMachine(
     val ticketCounter: TicketCounter,
     val tickets: MutableList<Lotto> = emptyList<Lotto>().toMutableList(),
 ) {
-    private var change = 0
+    var change = 0
+        private set
 
     init {
         change = ticketCounter.purchaseAmount.amount % TICKET_PRICE
         generateTickets()
     }
-
-    fun showChange() = change
 
     private fun generateTickets() {
         val lottoTickets = List(ticketCounter.generatedTicketCount) { Lotto(generateNumbers()) }

@@ -16,7 +16,7 @@ object LottoHandler {
                 ),
             )
             OutputView.displayTickets(machine.tickets, machine.ticketCounter)
-            OutputView.displayChange(machine.showChange())
+            OutputView.displayChange(machine.change)
 
             val winningTicket = readTicket("Please enter last week’s winning numbers.")
             val bonusNumber = readBonusNumbers()
