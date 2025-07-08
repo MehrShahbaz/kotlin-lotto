@@ -50,7 +50,7 @@ object OutputView {
     }
 
     fun displayReturnRate(returnRate: Float) {
-        println("Total return rate is $returnRate% (A rate below 1 means a loss).")
+        println("Total return rate is ${"%.2f".format(returnRate)} (A rate below 1 means a loss).")
     }
 
     fun displayError(errorMessage: String?) {
