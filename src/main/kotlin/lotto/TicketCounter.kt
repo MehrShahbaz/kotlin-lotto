@@ -7,7 +7,7 @@ data class TicketCounter(
     var generatedTicketCount = 0
 
     init {
-        var purchasableTickets = purchaseAmount.amount / LottoMachine.TICKET_PRICE
+        val purchasableTickets = purchaseAmount.amount / LottoMachine.TICKET_PRICE
         require(enteredTicketCount.count <= purchasableTickets) { COUNT_ERROR_MESSAGE }
         generatedTicketCount = purchasableTickets - enteredTicketCount.count
     }
