@@ -1,21 +1,28 @@
 package lotto
 
 class LottoMachine(
-    val ticketCounter: TicketCounter,
+    val purchaseAmount: PurchaseAmount,
+    val enteredTicketCount: EnteredTicketCount,
     val tickets: MutableList<Lotto> = emptyList<Lotto>().toMutableList(),
 ) {
     var change = 0
         private set
+    var generatedTicketCount = 0
+        private set
 
     init {
-        change = ticketCounter.purchaseAmount.amount % TICKET_PRICE
+        val purchasableTickets = purchaseAmount.amount / TICKET_PRICE
+        require(enteredTicketCount.count <= purchasableTickets) { COUNT_ERROR_MESSAGE }
+
+        generatedTicketCount = purchasableTickets - enteredTicketCount.count
+        change = purchaseAmount.amount % TICKET_PRICE
         generateTickets()
     }
 
-    fun manualTicketCount() = ticketCounter.purchaseAmount.amount
+    fun manualTicketCount() = purchaseAmount.amount
 
     private fun generateTickets() {
-        val lottoTickets = List(ticketCounter.generatedTicketCount) { Lotto(generateNumbers()) }
+        val lottoTickets = List(generatedTicketCount) { Lotto(generateNumbers()) }
         tickets.addAll(lottoTickets)
     }
 
@@ -28,6 +35,7 @@ class LottoMachine(
         private val NUMBER_LIST =
             (LottoNumber.MINIMUM_NUMBER..LottoNumber.MAXIMUM_NUMBER)
                 .map(LottoNumber::from)
+        private const val COUNT_ERROR_MESSAGE = "Count should be less than Purchasable Tickets"
         const val TICKET_PRICE = 1_000
     }
 }

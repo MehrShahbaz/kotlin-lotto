@@ -13,8 +13,8 @@ class EnteredTicketCountTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = [0, 4])
-    fun `Generates correct number of tickets as a list`(count: Int) {
+    @ValueSource(ints = [0, 5])
+    fun `Manual ticket count can be greater than and equal to 0`(count: Int) {
         assertEquals(EnteredTicketCount(count).count, count)
     }
 }

@@ -7,15 +7,23 @@ object LottoHandler {
     fun start() {
         try {
             val purchaseAmount = processPurchaseAmount()
-            val ticketCounter = processTicketCount(purchaseAmount)
+            val enteredTicketCount = processTicketCount()
 
-            val machine = LottoMachine(ticketCounter)
+            val machine =
+                LottoMachine(
+                    purchaseAmount,
+                    enteredTicketCount,
+                )
             machine.tickets.addAll(
                 readManualTickets(
                     machine.manualTicketCount(),
                 ),
             )
-            OutputView.displayTickets(machine.tickets, machine.ticketCounter)
+            OutputView.printTicketCount(
+                machine.enteredTicketCount,
+                machine.generatedTicketCount,
+            )
+            OutputView.displayTickets(machine.tickets)
             OutputView.displayChange(machine.change)
 
             val winningTicket = readTicket()
@@ -24,7 +32,7 @@ object LottoHandler {
 
             val calculator = Calculator(machine.tickets, winningNumbers)
 
-            val returnRate = calculator.calculateReturnRate(machine.ticketCounter.purchaseAmount)
+            val returnRate = calculator.calculateReturnRate(machine.purchaseAmount)
             OutputView.displayWinnings(calculator.results)
             OutputView.displayTotalWinningAmount(calculator.calculateTotalEarnings())
             OutputView.displayReturnRate(returnRate)
@@ -51,10 +59,9 @@ object LottoHandler {
         }
     }
 
-    private fun processTicketCount(purchaseAmount: PurchaseAmount): TicketCounter {
+    private fun processTicketCount(): EnteredTicketCount {
         return readInput {
-            val count = InputView.readManualTicketCount()
-            TicketCounter(purchaseAmount, EnteredTicketCount(count))
+            EnteredTicketCount(InputView.readManualTicketCount())
         }
     }
 
