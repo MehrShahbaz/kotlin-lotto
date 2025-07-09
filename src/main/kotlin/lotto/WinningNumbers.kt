@@ -5,7 +5,11 @@ data class WinningNumbers(
     val bonusNumber: LottoNumber,
 ) {
     init {
-        require(!winningNumbers.numbers.contains(bonusNumber)) { ERROR_MESSAGE }
+        require(doesNotContain(bonusNumber)) { ERROR_MESSAGE }
+    }
+
+    private fun doesNotContain(number: LottoNumber): Boolean {
+        return !winningNumbers.numbers.contains(number)
     }
 
     companion object {
