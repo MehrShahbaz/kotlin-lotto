@@ -14,11 +14,10 @@ object LottoHandler {
                     purchaseAmount,
                     enteredTicketCount,
                 )
-            machine.tickets.addAll(
-                readManualTickets(
-                    machine.manualTicketCount(),
-                ),
-            )
+
+            val manualTickets = readManualTickets(machine.manualTicketCount)
+            machine.appendManualTickets(manualTickets)
+
             OutputView.printTicketCount(
                 machine.enteredTicketCount,
                 machine.generatedTicketCount,

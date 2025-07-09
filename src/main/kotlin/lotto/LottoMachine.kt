@@ -10,6 +10,9 @@ class LottoMachine(
     var generatedTicketCount = 0
         private set
 
+    val manualTicketCount: Int
+        get() = enteredTicketCount.count
+
     init {
         val purchasableTickets = purchaseAmount.amount / TICKET_PRICE
         require(enteredTicketCount.count <= purchasableTickets) { COUNT_ERROR_MESSAGE }
@@ -19,7 +22,9 @@ class LottoMachine(
         generateTickets()
     }
 
-    fun manualTicketCount() = purchaseAmount.amount
+    fun appendManualTickets(manualTickets: List<Lotto>) {
+        tickets.addAll(manualTickets)
+    }
 
     private fun generateTickets() {
         val lottoTickets = List(generatedTicketCount) { Lotto(generateNumbers()) }
